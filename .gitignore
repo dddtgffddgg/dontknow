@@ -2,6 +2,7 @@
 .vscode/
 list_node.py
 my_list.py
+list.c
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
