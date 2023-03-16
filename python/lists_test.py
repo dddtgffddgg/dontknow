@@ -261,7 +261,7 @@ def test_list_eq(values):
         lst1.append(v)
         assert lst1 != lst2
         lst2.append(v)
-        assert lst1 == lst2git 
+        assert lst1 == lst2
 
 
 @pytest.mark.mylist
