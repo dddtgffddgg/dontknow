@@ -4,6 +4,7 @@ from list_node import ListNode
 from my_list import MyList
 from test_data import *
 
+
 @pytest.fixture(params=[SINGLE_VALUES1, SINGLE_VALUES2])
 def get_5_nodes(request):
     return {
@@ -35,6 +36,18 @@ def test_single_node_init(value):
 def test_wrong_init_raises_exception():
     with pytest.raises(TypeError):
         ListNode(1, 2)
+    with pytest.raises(TypeError):
+        ListNode(1, 0.2)
+    with pytest.raises(TypeError):
+        ListNode(1, "2")
+    with pytest.raises(TypeError):
+        ListNode(1, [2])
+    with pytest.raises(TypeError):
+        ListNode(1, (2))
+    with pytest.raises(TypeError):
+        ListNode(1, {2})
+    with pytest.raises(TypeError):
+        ListNode(1, {2: 2})
 
 
 @pytest.mark.listnode
@@ -224,6 +237,31 @@ def test_list_repr_nonempty(values):
     for v in values:
         lst.append(v)
     assert str(lst) == lst.__repr__()
+
+
+@pytest.mark.mylist
+@pytest.mark.parametrize("values", DIFFERENT_LISTS)
+def test_list_eq(values):
+    lst1 = MyList()
+    assert lst1 is not None
+    assert lst1 is not False
+    assert lst1 != 0
+    assert lst1 != 0.0
+    assert lst1 != ""
+    assert lst1 != []
+    assert lst1 != ()
+    assert lst1 != {}
+    assert lst1 != dict()
+
+    lst2 = MyList()
+    assert lst1 == lst2
+    assert lst1 is not lst2
+
+    for v in values:
+        lst1.append(v)
+        assert lst1 != lst2
+        lst2.append(v)
+        assert lst1 == lst2git 
 
 
 @pytest.mark.mylist
