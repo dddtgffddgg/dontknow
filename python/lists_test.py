@@ -612,7 +612,6 @@ def test_list_count_nonempty(values):
         lst.append(v)
     for v in values:
         assert lst.count(v) == 1
-    lst = MyList()
 
 
 @pytest.mark.mylist

@@ -112,10 +112,10 @@ TEST(Append, AppendTwoTimes)
     list_append(list_dbl, &d1);
     list_append(list_dbl, &d2);
 
-    TEST_ASSERT_EQUAL_INT(d1, *(double *)list_dbl->head->data);
+    TEST_ASSERT_EQUAL_DOUBLE(d1, *(double *)list_dbl->head->data);
     TEST_ASSERT_NOT_NULL(list_dbl->head->next);
 
-    TEST_ASSERT_EQUAL_INT(d2, *(double *)list_dbl->head->next->data);
+    TEST_ASSERT_EQUAL_DOUBLE(d2, *(double *)list_dbl->head->next->data);
     TEST_ASSERT_NULL(list_dbl->head->next->next);
 }
 
@@ -175,7 +175,7 @@ TEST(Append, AppendNTimes)
     node = list_dbl->head;
     for (size_t i = 0; i < n; i++)
     {   
-        TEST_ASSERT_EQUAL_INT(darr[i], *(double *)node->data);
+        TEST_ASSERT_EQUAL_DOUBLE(darr[i], *(double *)node->data);
         node = node->next;
         if (i == n - 1)
             break;
@@ -319,7 +319,7 @@ TEST_TEAR_DOWN(Contains)
 
 TEST(Contains, EmptyListNotContainsAnything)
 {
-    TEST_IGNORE();
+    // TEST_IGNORE();
     TEST_MESSAGE("This test can take pretty long time to finish...");
     for (int i = INT_MIN; i < INT_MAX; ++i)
         TEST_ASSERT_FALSE(list_contains(list_int, &i));
@@ -374,7 +374,7 @@ TEST_TEAR_DOWN(Index)
 
 TEST(Index, EmptyListIndexSizeMax)
 {
-    TEST_IGNORE();
+    // TEST_IGNORE();
     TEST_MESSAGE("This test can take pretty long time to finish...");
     // SIZE_MAX used as not found flag
     for (int i = INT_MIN; i < INT_MAX; ++i)
@@ -524,11 +524,11 @@ TEST(Pop, PopFromNonEmptyBig)
     for (size_t i = n - 1; i > 0; i--)
     {   
         dactual = (double *)list_pop(list_dbl);
-        TEST_ASSERT_EQUAL_INT(darr[i], *dactual);
+        TEST_ASSERT_EQUAL_DOUBLE(darr[i], *dactual);
         free(dactual);
     }
     dactual = (double *)list_pop(list_dbl);
-    TEST_ASSERT_EQUAL_INT(darr[0], *dactual);
+    TEST_ASSERT_EQUAL_DOUBLE(darr[0], *dactual);
     free(dactual);
     free(darr);
 
@@ -807,7 +807,7 @@ TEST(Insert, InsertToEmptyList)
         list_insert(list_dbl, i, &d);
         TEST_ASSERT_FALSE(list_empty(list_dbl));
         TEST_ASSERT_EQUAL_UINT64(1ul, list_length(list_dbl));
-        TEST_ASSERT_EQUAL_INT(d, *(double *)list_dbl->head->data);
+        TEST_ASSERT_EQUAL_DOUBLE(d, *(double *)list_dbl->head->data);
         free(list_pop(list_dbl));
         TEST_ASSERT_TRUE(list_empty(list_dbl));
     }
